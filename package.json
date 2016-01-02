@@ -1,0 +1,11 @@
+{
+  "name": "Retrogames",
+  "version": "0.0.0",
+  "main": "server.js",
+  "mail": "zaza.samuele@gmail.com",
+  "dependencies": {
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "mongoose": "^4.3.4"
+  }
+}
