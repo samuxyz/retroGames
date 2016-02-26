@@ -1,0 +1,70 @@
+@font-face {
+    font-family: retro-font;
+    src: url(arcadeclassic.ttf);
+}
+body{
+	background: url('../img/login.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	font-family:retro-font;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+  font-size: 38px;
+  color: rgb(255, 86, 46);
+  text-align:center;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  font-family:retro-font;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#select_folder {
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    width: 17em;
+    top: 40%;
+    padding: 1em;
+    background: #FF582E;
+    border-radius: 2em;
+    border: solid 1px #FF582E;
+    color: white;
+}
+
+#select_folder:hover {
+    box-shadow: 0px 0px 20px #FF582E;
+    cursor: pointer;
+}

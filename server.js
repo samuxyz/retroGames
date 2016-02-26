@@ -17,11 +17,11 @@ var Game = require('./app/models/game');
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-
-
+//app.use(express.methodOverride());
+app.use(express.static(__dirname + '/public'));
 
 var router = express.Router();
-
+var router2 = express.Router();
 router.get('/', function(req, res){
 	res.json({message: 'welcome to retrogames'});
 });
@@ -34,7 +34,8 @@ router.route('/games')
 		game.name = req.body.name;
 		game.year = req.body.year;
 		game.description = req.body.description;
-		
+		game.picture = req.body.picture;
+		console.log(game.name);
 		game.save(function(err){
 			if(err){
 				res.send(err);
@@ -45,7 +46,7 @@ router.route('/games')
 	})
 	//get all the bear
 	.get(function(req,res){
-		Game.find(function(err,games){
+		Game.find(null,null,{sort: { postDate : 1}},function(err,games){
 			if(err){
 				res.send(err);
 			}
@@ -91,7 +92,11 @@ router.route('/games/:game_id')
 	
 	})
 	
-
+router2.route("/games/:page").get(function(req,res){
+	console.log("here");
+	var page = req.params.page;
+	 res.sendfile('public/'+page+'.html', {root: __dirname })
+});
 app.use('/api', router);
-
+app.use(router2);
 app.listen(3000);

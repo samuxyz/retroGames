@@ -6,7 +6,9 @@ var gameSchema = new Schema(
 	{
 		name: String,
 		year: String,
-		description: String
+		description: String,
+		picture: String,
+		postDate : { type : Date, default: Date.now }
 		
 	}
 );

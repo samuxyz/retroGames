@@ -1,0 +1,27 @@
+body {
+  padding-top: 50px;
+  font-family: retro-font;
+  background-color: #222;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.container-position{
+overflow: auto;
+    padding-bottom: 200px;
+}
+
+@font-face {
+    font-family: retro-font;
+    src: url(arcadeclassic.ttf);
+}
+
+.ng-invalid.ng-dirty {
+border-color: #FA787E;
+}
+!
+.ng-valid.ng-dirty {
+border-color: #78FA89;
+}
