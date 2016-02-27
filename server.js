@@ -22,11 +22,19 @@ app.use(express.static(__dirname + '/public'));
 
 var router = express.Router();
 var router2 = express.Router();
+
+
+
+
 router.get('/', function(req, res){
 	res.json({message: 'welcome to retrogames'});
 });
 
-
+router2.route("/")
+	.get(function(req, res){
+		res.sendfile('public/views/index.html', {root: __dirname });
+	});
+	
 router.route('/games')
 	//create a game
 	.post(function(req,res){
@@ -70,6 +78,9 @@ router.route('/games/:game_id')
 				res.send(err);
 			}
 			game.name = req.body.name;
+			game.description = req.body.description;
+			game.picture = req.body.picture;
+			game.year = req.body.year;
 			
 			game.save(function(err){
 				if(err){
@@ -95,8 +106,14 @@ router.route('/games/:game_id')
 router2.route("/games/:page").get(function(req,res){
 	console.log("here");
 	var page = req.params.page;
-	 res.sendfile('public/'+page+'.html', {root: __dirname })
+	 res.sendfile('public/views/'+page+'.html', {root: __dirname });
 });
+router2.route("*").get(function(req,res){
+	console.log("here");
+	var page = req.params.page;
+	 res.sendfile('public/views/index.html', {root: __dirname });
+});
+
 app.use('/api', router);
 app.use(router2);
 app.listen(3000);

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var gameSchema = new Schema(
 	{
 		name: String,
-		year: String,
+		year: Number,
 		description: String,
 		picture: String,
 		postDate : { type : Date, default: Date.now }

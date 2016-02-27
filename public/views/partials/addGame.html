@@ -1,0 +1,22 @@
+<form name="gameForm" novalidate>
+	<div class="thumbnail" style="background-color: #333333;border:1px solid #FF582E;" >
+	<div style="padding:9px;">
+	<h1 style="color:#FF582E"> Add a Game to the List!</h1>
+	<div class="input-group">
+	Name* <input type="text" class="form-control" placeholder="Insert the game name" aria-describedby="basic-addon2" size="50" ng-model="addGameCtrl.game.name" required>
+	</div>
+	<div class="input-group">
+	description* <textarea class="form-control" rows="10" cols="100" placeholder="Start writing, or copy and paste from a document..." ng-model="addGameCtrl.game.description" required>></textarea>
+	</div>
+	<div class="input-group">
+	Year* <input type="number" min="1970" max="2016" class="form-control" placeholder="1986" aria-describedby="basic-addon2" ng-model="addGameCtrl.game.year" required>
+	</div>
+	<div class="input-group">
+	Picture* <input type="text" class="form-control" placeholder="picture URL" aria-describedby="basic-addon2" size="50" ng-model="addGameCtrl.game.picture" required>
+	</div>
+	<br></br>
+	
+	<p><button class="btn btn-primary" role="button" ng-click="gameForm.$valid && addGameCtrl.addGame()">Save Game</button></p>
+	</div>
+	</div>
+</form>

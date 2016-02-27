@@ -1,46 +1,71 @@
 (function(){
-	var app = angular.module('myApp', []).
-	config(['$locationProvider', function($locationProvider) {
-    
-    $locationProvider.html5Mode(true);
-		}]);
-	app.controller('ListController', function($http){
-	
+	var app = angular.module('myApp', ['ngRoute', 'ngResource', 'gameService']).
+	config(function($routeProvider, $locationProvider) {
 		
+		$routeProvider
+			.when('/home', {
+				templateUrl : '/views/partials/home.html',
+				controller : 'ListController',
+				controllerAs : 'lCtrl'
+			})
+			.when('/addGame', {
+				templateUrl : '/views/partials/addGame.html',
+				controller : 'AddGameController',
+				controllerAs : 'addGameCtrl'
+			})
+			.when('/addGame/:id', {
+				templateUrl : '/views/partials/addGame.html',
+				controller : 'AddGameController',
+				controllerAs : 'addGameCtrl'
+			})
+			.otherwise({
+				redirectTo: '/home'
+			});
+		$locationProvider.html5Mode(true);
+		
+	
+	});
+	app.controller('ListController', function($location, Game){	
 		this.gameList = {};
 		var self = this;
-		$http.get('/api/games')
-			.success(function(data){
-				self.gameList = data;
-			});
-		this.deleteGame = function(id){
+		Game.query(function(data){
+			self.gameList = data;
+		});
 		
-			$http.delete("/api/games/"+id)
-				.success(function(data){
-					self.gameList = self.gameList.filter(function(game){
+		this.deleteGame = function(id){
+			Game.delete({id : id}, function(){
+				self.gameList = self.gameList.filter(function(game){
 						return game._id != id;
 					});
-				console.log(id);
 			});
-		};		
-		//this.gameList
+		};
+		this.editGame = function(id){
+			$location.path('/addGame/' + id);
+		}
 		
 	});
-	app.controller('AddGameController', ['$http', '$log', function($http, $log){
-	
+	app.controller('AddGameController', function($location, Game, $routeParams){
+		var id = $routeParams.id;
 		this.game = {};
+		var self = this;
+		if(typeof id != 'undefined'){
+			Game.get({id : id}, function(data){
+				self.game = data;
+			})
+		};
 		
 		this.addGame = function(){
-			$http.post('/api/games', this.game)
-			.success(function(date){
-				$log.log("here");
-			})
-			.error(function(err){
-				console.log(err);
-			});
-			this.game = {};
-		}
-	}]);
+			if(typeof id != 'undefined'){
+				Game.update({id : id}, this.game, function(){
+					$location.path('/home');
+				});
+			}else{
+				Game.save(this.game, function(){
+					$location.path('/home');
+				});
+			}
+		};
+	});
 	var games = [
 			{
 				name : "Super Mario Bros",
