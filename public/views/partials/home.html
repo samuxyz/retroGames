@@ -9,8 +9,8 @@
 				<p class="text-justify" style="color:white;">{{game.description | limitTo : '250'}}...</p>
 				<p>
 					<button class="btn btn-primary" role="button">View >></button>
-					<button class="btn btn-warning" role="button" ng-click="lCtrl.editGame(game._id)">Edit</button>
-					<button class="btn btn-danger" role="button" ng-click="lCtrl.deleteGame(game._id)">Delete</button>
+					<button class="btn btn-warning" role="button" ng-click="lCtrl.editGame(game._id)" ng-if="isAuthenticated()">Edit</button>
+					<button class="btn btn-danger" role="button" ng-click="lCtrl.deleteGame(game._id)" ng-if="isAuthenticated()">Delete</button>
 				</p>
 			  </div>
 			</div>

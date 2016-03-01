@@ -2,8 +2,8 @@
     font-family: retro-font;
     src: url(arcadeclassic.ttf);
 }
-body{
-	background: url('../img/login.jpg');
+.body{
+	//background: url('../img/login.jpg');
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -45,9 +45,20 @@ body{
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  //border-top-left-radius: 0;
+  //border-top-right-radius: 0;
+}
+.middle-field{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.last-field{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin-bottom:10px;
 }
 
 #select_folder {
@@ -55,9 +66,9 @@ body{
     text-align: center;
     margin: 0 auto;
     position: relative;
-    width: 17em;
+    //width: 17em;
     top: 40%;
-    padding: 1em;
+   // padding: 1em;
     background: #FF582E;
     border-radius: 2em;
     border: solid 1px #FF582E;

@@ -9,17 +9,23 @@
 
     <title>Retrogames</title>
 
-    
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">]
+	<link href="./css/bootstrap-social.css" rel="stylesheet">
     <link href="./css/template.css" rel="stylesheet">
+	<link href="./css/angular-toastr.css" rel="stylesheet">
+	
+	<link href="./css/signin.css" rel="stylesheet">
 	<script src="./js/jquery.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/angular.js"></script>
 	<script src="./js/angular-route.min.js"></script>
+	<script src="./js/angular-toastr.tpls.js"></script>
 	<script src="./js/angular-resource.min.js"></script>
+	<script src="./js/satellizer.js"></script>
 	<script src="./services/gameService.js"></script>
 	<script src="./app.js"></script>
-	<body>
+	<body ng-controller="MainController as mainCtrl">
 
 		<nav class="navbar navbar-inverse navbar-fixed-top" style="border-color:#FF582E">
 		  <div class="container">
@@ -34,13 +40,17 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 			  <ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-					<li><a href="/addGame">Add Game</a></li>
-					
-				  </ul>
-				</li>
+				
+					<li ng-if="isAuthenticated()"><a href="/addGame">Add Game</a></li>
+				 
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right" ng-if="!isAuthenticated()">	
+				  <li><a href="/login">Sign in</a></li>
+				  <li><a href="/signup">Sign up</a></li>
+			  </ul>
+				<ul class="nav navbar-nav navbar-right" ng-if="isAuthenticated()">
+				  <li><a href="/logout">Logout</a></li>
+				</ul>
 			  </ul>
 			</div><!--/.nav-collapse -->
 		  </div>
@@ -71,7 +81,7 @@
 						<ul class='list-unstyled'>
 						  <li><i class='glyphicon glyphicon-globe'></i> Taipei, TW</li>
 						  <li><i class='glyphicon glyphicon-phone'></i> 0989-999-564</li>
-						  <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:samzaza@novellink.com'>samzaza@novellink.com</a></li>
+						  <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:zaza.samuele@gmail.com'>zaza.samuele@gmail.com</a></li>
 						</ul>
 						
 					</div>

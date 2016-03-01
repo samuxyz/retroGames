@@ -1,0 +1,23 @@
+<div class="body-login back">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Sign Up</h2>
+		
+		<label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus ng-model='signupCtrl.user.email'>  
+		<label for="inputName" class="sr-only">Name</label>
+        <input type="text" id="inputName" class="form-control middle-field" placeholder="Name" required autofocus ng-model='signupCtrl.user.name'>
+		<label for="inputConfirmPassword" class="sr-only">Confirm password</label>
+        <input type="password" id="inputConfirmPassword" class="form-control middle-field" placeholder="Confirm Password" required autofocus ng-model='signupCtrl.user.password'>		
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control last-field" placeholder="Password" required ng-model='signupCtrl.user.confirmPassword'>
+		
+        <p style="margin-top: 30px;text-align:center;color:#9d9d9d">By clicking on Sign up, you agree to <a href="#">terms &amp; conditions</a> and <a href="#">privacy policy</a></p>
+        <button ng-click="signupCtrl.signup()" class="btn btn-lg btn-primary btn-block" type="submit" id="select_folder" style="margin-top: 30px;">Sign Up</button>
+		<p style="margin-top: 30px;
+    color: #9d9d9d; text-align:center;margin-bottom:30px;">Already have an account? <a href="/login" style="text-decoration:underline;">Sign in Now!</a></p>
+	<div style="border-bottom: 1px solid;"></div>
+	
+      </form>
+
+    </div>

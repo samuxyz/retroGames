@@ -1,6 +1,6 @@
 (function(){
-	var app = angular.module('myApp', ['ngRoute', 'ngResource', 'gameService']).
-	config(function($routeProvider, $locationProvider) {
+	var app = angular.module('myApp', ['ngRoute', 'ngResource', 'gameService', 'satellizer', 'toastr']).
+	config(function($routeProvider, $locationProvider, $authProvider) {
 		
 		$routeProvider
 			.when('/home', {
@@ -18,10 +18,55 @@
 				controller : 'AddGameController',
 				controllerAs : 'addGameCtrl'
 			})
+			.when('/signup', {
+				templateUrl : '/views/partials/signup.html',
+				controller : 'SignupController',
+				controllerAs: 'signupCtrl',
+				resolve: {
+					skipIfLoggedIn: skipIfLoggedIn
+				}
+			})
+			.when('/login', {
+				templateUrl : '/views/partials/login.html',
+				controller : 'LoginController',
+				controllerAs : 'login',
+				resolve: {
+				  skipIfLoggedIn: skipIfLoggedIn
+				}
+			})
+			.when('/logout', {
+				url: '/logout',
+				template: null,
+				controller: 'LogoutCtrl'
+			})
 			.otherwise({
 				redirectTo: '/home'
 			});
+			
+		$authProvider.facebook({
+		  clientId: '187463001628270'
+		});
 		$locationProvider.html5Mode(true);
+		
+		function skipIfLoggedIn($q, $auth, $location) {
+			var deferred = $q.defer();
+			if ($auth.isAuthenticated()) {
+			$location.path('/');
+		  } else {
+			deferred.resolve();
+		  }
+		  return deferred.promise;
+		}
+
+    function loginRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.resolve();
+      } else {
+        $location.path('/login');
+      }
+      return deferred.promise;
+    }
 		
 	
 	});
@@ -66,6 +111,64 @@
 			}
 		};
 	});
+	app.controller('LoginController', function($location, $auth, toastr){
+		var self = this;
+		this.login = function() {
+		  $auth.login(self.user)
+			.then(function() {
+			  toastr.success('You have successfully signed in!');
+			  $location.path('/');
+			})
+			.catch(function(error) {
+			  toastr.error(error.data.message, error.status);
+			});
+		};
+		this.authenticate = function(provider) {
+		  $auth.authenticate(provider)
+			.then(function() {
+			  toastr.success('You have successfully signed in with ' + provider + '!');
+			  $location.path('/');
+			})
+			.catch(function(error) {
+			  if (error.error) {
+				// Popup error - invalid redirect_uri, pressed cancel button, etc.
+				toastr.error(error.error);
+			  } else if (error.data) {
+				// HTTP response error from server
+				toastr.error(error.data.message, error.status);
+			  } else {
+				toastr.error(error);
+			  }
+			});
+		};
+	});
+	app.controller('MainController', function($location, $auth, $scope){
+		$scope.isAuthenticated = function() {
+		  return $auth.isAuthenticated();
+		};
+	});
+	app.controller('LogoutCtrl', function($location, $auth, toastr) {
+    if (!$auth.isAuthenticated()) { return; }
+    $auth.logout()
+      .then(function() {
+        toastr.info('You have been logged out');
+        $location.path('/');
+      });
+  });
+  app.controller('SignupController', function($scope, $location, $auth, toastr) {
+	var self = this;
+    this.signup = function() {
+      $auth.signup(self.user)
+        .then(function(response) {
+          $auth.setToken(response);
+          $location.path('/');
+          toastr.info('You have successfully created a new account and have been signed-in');
+        })
+        .catch(function(response) {
+          toastr.error(response.data.message);
+        });
+    };
+  });
 	var games = [
 			{
 				name : "Super Mario Bros",
