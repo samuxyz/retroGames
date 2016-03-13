@@ -10,21 +10,42 @@
     <title>Retrogames</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link href="./css/bootstrap.min.css" rel="stylesheet">]
-	<link href="./css/bootstrap-social.css" rel="stylesheet">
-    <link href="./css/template.css" rel="stylesheet">
-	<link href="./css/angular-toastr.css" rel="stylesheet">
+    
+	<!-- Minified versions without concatenation
+	<link href="./css/min/bootstrap.min.css" rel="stylesheet">]
+	<link href="./css/min/bootstrap-social.min.css" rel="stylesheet">
+    <link href="./css/min/template.min.css" rel="stylesheet">
+	<link href="./css/min/angular-toastr.min.css" rel="stylesheet">	
+	<link href="./css/min/signin.min.css" rel="stylesheet">
+	-->
 	
-	<link href="./css/signin.css" rel="stylesheet">
-	<script src="./js/jquery.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/angular.js"></script>
-	<script src="./js/angular-route.min.js"></script>
-	<script src="./js/angular-toastr.tpls.js"></script>
-	<script src="./js/angular-resource.min.js"></script>
-	<script src="./js/satellizer.js"></script>
+	<!-- concatenated for production -->
+	<link href="./css/style.css" rel="stylesheet">
+	
+	<!-- minified version without concatenation
+	<script src="./js/min/jquery.min.js"></script>
+	<script src="./js/min/bootstrap.min.js"></script>
+	<script src="./js/min/angular.min.js"></script>
+	<script src="./js/min/angular-route.min.js"></script>
+	<script src="./js/min/angular-toastr.tpls.min.js"></script>
+	<script src="./js/min/angular-resource.min.js"></script>
+	<script src="./js/min/satellizer.min.js"></script>
+	-->
+	<!-- concatenated for production not uglified -->
+	<script src="./js/lib.js"></script>
+	
+	
+	<!-- development files for angular
 	<script src="./services/gameService.js"></script>
-	<script src="./app.js"></script>
+	<script src="./controllers/mainController.js"></script>
+	<script src="./controllers/listController.js"></script>
+	<script src="./controllers/addGameController.js"></script>
+	<script src="./controllers/signupController.js"></script>
+	<script src="./controllers/loginController.js"></script>
+	<script src="./app.js"></script>-->
+	
+	<!-- production file -->
+	<script src="./js/app.js"></script>
 	<body ng-controller="MainController as mainCtrl">
 
 		<nav class="navbar navbar-inverse navbar-fixed-top" style="border-color:#FF582E">
@@ -69,7 +90,7 @@
 				<div class="row">
 				<div class="col-md-6 col-xs-12">
 					<div class="col-xs-6">
-						<h4>Word Counter</h4>
+						<h4>Retrogames</h4>
 						<ul class='list-unstyled'>
 							<li><a href="#">About</a></li>
 							<li><a href="#">Contact us</a></li>
@@ -93,6 +114,8 @@
 				</div>
 			</div>
 		</div>
+		
 
+  
 	</body>
 </html>
